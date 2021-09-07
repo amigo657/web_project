@@ -25,8 +25,14 @@
 
 <body>
 {% include "base/header.html" %}
+{% block banner_area %}
 {% include "base/baner_area.html" %}
-{% include "base/feature_area.html" %}
+{% endblock banner_area %}
+{% block feature_area %}
+{% include "base/feature_area.html" %}  {% comment %} здесь пустая строка. Скопировано из папки all_blogs {% endcomment %}
+{% endblock feature_area %}
+{% block all_blogs %}
+{% endblock all_blogs %}
 {% block home %}
 {% endblock home %}
 {% include "base/footer.html" %}
