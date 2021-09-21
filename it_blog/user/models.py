@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from django.db.models.signals import pre_save
 from django.dispatch.dispatcher import receiver
 from django.utils.deconstruct import deconstructible
+from django.utils.html import mark_safe
 
 
 @deconstructible
@@ -28,6 +29,12 @@ class User(AbstractUser):
         )
 
 
+    def show_image(self):
+        return mark_safe('<img src="{}" width="50px" />'.format('https://www.vokrug.tv/pic/person/2/b/f/4/2bf448098b7badf3b37e87c510da29bc.jpeg'))
+    show_image.short_descriotion = "Avatar"
+    show_image.all_tags = True
+
+
     def send_sms(self, message):
         ...
 
@@ -48,3 +55,5 @@ def hash_passwd(sender, instance, **kwargs):
     if (instance.id is None) or (
         sender.objects.get(id=instance.id).password != instance.password):
         instance.set_password(instance.password)
+
+# хэширование пароля (бесполезная модель)
