@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block home %}
+{% include "home/popular_course.html" %}
+{% include "home/video_area.html" %}
+{% include "home/other_feature.html" %}
+{% include "home/testimonials_area.html" %}
+{% include "home/registration_area.html"%}
+{% include "home/blog_post_area.html" %}
+{% endblock home %}
+
+
+{% block banner_area %}
+{% include "home/home_banner.html" %}
+{% endblock banner_area %}
