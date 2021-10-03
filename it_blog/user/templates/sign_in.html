@@ -1,28 +1,91 @@
 {% extends 'base.html' %}
 {% block user %}
-{% comment %} <form action="{% url 'signin_page' %}" method="post">
-    {% csrf_token %}
-    {{ signin_form }}
-    <input type="submit" value="Sing In"/>
-</form> {% endcomment %}
+
 <div class="offset-lg-3 col-lg-4 col-md-6">
     <div class="course-form-section">
         <h3 class="">Courses for Free</h3>
         <p class="">It is high time for learning</p>
     <form class="course-form-area contact-page-form course-form text-right" id="myForm" action="{% url 'signin_page' %}" method="post">
             {% csrf_token %}
+            {% comment %} наличие общих ошибок {% endcomment %}
+            {% if signin_form.non_field_errors %}
             <div class="form-group col-md-12">
-                {% comment %} <input type="text" class="form-control" id="name" name="name" placeholder="Name" onfocus="this.placeholder = ''"
-                 onblur="this.placeholder = 'Name'"> {% endcomment %}
+                {{ signin_form.non_field_errors }}
+            </div>
+            {% endif %}
+
+            {% comment %} наличие ошибок по конкретному полю {% endcomment %}
+            {% if signin_form.username.errors %}
+            <div class="form-group col-md-12">
+                {{ signin_form.username.errors }}
+            </div>
+            {% endif %}
+            <div class="form-group col-md-12">
+                {{ signin_form.username.label}}
                 {{ signin_form.username}}
             </div>
+            {% if signin_form.phone.errors %}
             <div class="form-group col-md-12">
-                <input type="text" class="form-control" id="subject" name="subject" placeholder="Phone Number" onfocus="this.placeholder = ''"
-                 onblur="this.placeholder = 'Phone Number'">
+                {{ signin_form.phone.errors }}
             </div>
+            {% endif %}
             <div class="form-group col-md-12">
-                <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" onfocus="this.placeholder = ''"
-                 onblur="this.placeholder = 'Email Address'">
+                {{ signin_form.phone.label}}
+                {{signin_form.phone}}
+            </div>
+            {% if signin_form.email.errors %}
+            <div class="form-group col-md-12">
+                {{ signin_form.email.errors }}
+            </div>
+            {% endif %}
+            <div class="form-group col-md-12">
+                {{ signin_form.email.label}}
+                {{ signin_form.email }}
+            </div>
+            {% if signin_form.first_name.errors %}
+            <div class="form-group col-md-12">
+                {{ signin_form.first_name.errors }}
+            </div>
+            {% endif %}
+            <div class="form-group col-md-12">
+                {{ signin_form.first_name.label}}
+                {{ signin_form.first_name }}
+            </div>
+            {% if signin_form.last_name.errors %}
+            <div class="form-group col-md-12">
+                {{ signin_form.last_name.errors }}
+            </div>
+            {% endif %}
+            <div class="form-group col-md-12">
+                {{ signin_form.last_name.label}}
+                {{ signin_form.last_name }}
+            </div>
+            {% if signin_form.password.errors %}
+            <div class="form-group col-md-12">
+                {{ signin_form.password.errors }}
+            </div>
+            {% endif %}
+            <div class="form-group col-md-12">
+                {{ signin_form.password.label}}
+                {{ signin_form.password }}
+            </div>
+            {% if signin_form.repeat_password.errors %}
+            <div class="form-group col-md-12">
+                {{ signin_form.repeat_password.errors }}
+            </div>
+            {% endif %}
+            <div class="form-group col-md-12">
+                {{ signin_form.repeat_password.label}}
+                {{ signin_form.repeat_password }}
+            </div>
+            {% if signin_form.is_agree.errors %}
+            <div class="form-group col-md-12">
+                {{ signin_form.is_agree.errors }}
+            </div>
+            {% endif %}
+            <div class="form-group col-md-12">
+                {{ signin_form.is_agree.label}}
+                {{ signin_form.is_agree }}
             </div>
             <div class="col-lg-12 text-center">
                 <button class="btn text-uppercase">Submit</button>
