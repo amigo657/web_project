@@ -34,12 +34,13 @@
               </div>
             </li>
             <li><a href="contacts.html">Contacts</a></li>
+            {% if user.is_anonymous %}
             <li><a href="{% url 'signin_page' %}">Sign In</a></li>
-            <li>
-              <button class="search">
-                <span class="lnr lnr-magnifier" id="search"></span>
-              </button>
-            </li>
+            <li><a href="{% url 'login_page' %}">Log in</a></li>
+            {% else %}
+            <li><a href="/admin/">{{user.username}}</a></li>
+            <li><a href="{% url 'logout_page' %}">LogOut</a></li>
+            {% endif %}
           </ul>
         </div>
       </div>

@@ -1,5 +1,5 @@
 from django import forms
-from django.db.utils import IntegrityError
+from django.contrib.auth import login as log_in, authenticate
 from user.models import User
 
 class UserSignIn(forms.Form):
@@ -127,3 +127,42 @@ class UserSignIn(forms.Form):
             password = self.cleaned_data["password"],
         )
         new_user.save()
+
+class UserLogIn(forms.Form):
+    username = forms.CharField(
+        label = 'User name',
+        widget=forms.TextInput(
+            attrs={
+                "id": "name",
+                "class":"form-control",
+                "placeholder": "User name",
+                "onfocus": "this.placeholder = ''",
+                "onblur": "this.placeholder = 'User name'"
+            }
+        ),
+    )
+    password = forms.CharField(
+        label = 'Password',
+        widget=forms.PasswordInput(
+            attrs={
+                "id": "password",
+                "class":"form-control",
+                "placeholder": "Password",
+                "onfocus": "this.placeholder = ''",
+                "onblur": "this.placeholder = 'Password'"
+            }
+        ),
+    )
+
+    def cleane(self):
+        user = authenticate(**dict(self.cleaned_data))
+        if user is not None:
+            self.user = user
+            return self.cleaned_data
+        else:
+            self.add_error("username", "Неправильное имя пользователя")
+            self.add_error("password", "Неверный пароль")
+            raise forms.ValidationError("Пользователь не определн!")
+
+    def login(self, request):
+        log_in(request, self.user)
